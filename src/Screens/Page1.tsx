@@ -10,7 +10,7 @@ export const Page1: React.FC = () => {
 
   const goToPage2 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage2)->', `<--`);
-    navigation.navigate('Page2');
+    navigation.navigate('Page2', { from: 'Page ^1' });
   };
 
   const goBack = () => {

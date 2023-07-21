@@ -4,29 +4,25 @@ import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useColorThemeStyles } from '../hooks';
 import { useNavigation } from '@react-navigation/native';
 
-export const Main: React.FC = () => {
+export const Page3: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<any>();
-  const goToPage1 = () => {
-    console.log(new Date().toISOString(), '-(Button goToPage1)->', `<--`);
-    navigation.navigate('Page1');
+
+  const goBack = () => {
+    console.log(new Date().toISOString(), '-(Button goBack Page3)->', `<--`);
+    navigation.goBack();
   };
-  const goToPage2 = () => {
-    console.log(new Date().toISOString(), '-(Button goToPage2)->', `<--`);
-    navigation.navigate('Page2', { from: 'Page ^Main' });
-  };
-  console.log(new Date().toISOString(), '-(RENDER)-Main->', `<--`);
+
   return (
     <SafeAreaView style={Styles}>
       <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="Main Page">
-            <Text>Hello ARTEM !</Text>
+          <Section title="Page 3">
+            <Text>Page 3</Text>
           </Section>
-          <Button title={'Page #1'} onPress={goToPage1} />
-          <Button title={'Page #2'} onPress={goToPage2} />
         </View>
+        <Button title={'goBack'} onPress={goBack} />
       </ScrollView>
     </SafeAreaView>
   );
