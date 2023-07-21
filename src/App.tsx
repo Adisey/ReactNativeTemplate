@@ -1,26 +1,26 @@
 import React from 'react';
-import { Button, SafeAreaView, ScrollView, View } from 'react-native';
-import { CustomStatusBar, Section } from './Components';
-import { useColorThemeStyles } from './hooks';
+import { Main } from './Screens/Main';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Page2 } from './Screens/Page2';
+import { Page1 } from './Screens/Page1';
+
+const Stack = createNativeStackNavigator();
 
 function App(): Element {
-  const Styles = useColorThemeStyles();
-
-  const handlerButtonPress = () => {
-    console.log(new Date().toISOString(), '-(Button onPress)->', `<--`);
-  };
-
-  console.log(new Date().toISOString(), '-(RENDER)->', `<--`);
+  console.log(new Date().toISOString(), '-(RENDER)-APP->', `<--`);
   return (
-    <SafeAreaView style={Styles}>
-      <CustomStatusBar />
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
-        <View style={Styles}>
-          <Section title="START">Hello ARTEM !</Section>
-          <Button title={'Button+Log'} onPress={handlerButtonPress} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{ title: 'Main Page' }}
+        />
+        <Stack.Screen name="Page1" component={Page1} />
+        <Stack.Screen name="Page2" component={Page2} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
