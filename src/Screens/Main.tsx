@@ -2,11 +2,22 @@ import React from 'react';
 import { CustomStatusBar, Section } from '../Components';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useColorThemeStyles } from '../hooks';
-import { useNavigation } from '@react-navigation/native';
+import {
+  CompositeNavigationProp,
+  useNavigation,
+} from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { RootStackParamList } from '../Navigation/RootStackParamList';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type MainNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<RootStackParamList, 'Page2'>,
+  StackNavigationProp<RootStackParamList>
+>;
 
 export const Main: React.FC = () => {
   const Styles = useColorThemeStyles();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<MainNavigationProp>();
   const goToPage1 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage1)->', `<--`);
     navigation.navigate('Page1');
@@ -14,6 +25,10 @@ export const Main: React.FC = () => {
   const goToPage2 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage2)->', `<--`);
     navigation.navigate('Page2', { from: 'Page ^Main' });
+  };
+  const goToSettings = () => {
+    console.log(new Date().toISOString(), '-(Button goToPage3)->', `<--`);
+    navigation.navigate('Settings');
   };
   console.log(new Date().toISOString(), '-(RENDER)-Main->', `<--`);
   return (
@@ -26,6 +41,7 @@ export const Main: React.FC = () => {
           </Section>
           <Button title={'Page #1'} onPress={goToPage1} />
           <Button title={'Page #2'} onPress={goToPage2} />
+          <Button title={'Settings'} onPress={goToSettings} />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,18 +1,19 @@
 import React from 'react';
 import { CustomStatusBar, Section } from '../Components';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import { useColorThemeStyles } from '../hooks';
-import { useNavigation } from '@react-navigation/native';
 
 export const Page3: React.FC = () => {
   const Styles = useColorThemeStyles();
-  const navigation = useNavigation<any>();
 
-  const goBack = () => {
-    console.log(new Date().toISOString(), '-(Button goBack Page3)->', `<--`);
-    navigation.goBack();
-  };
-
+  console.log(new Date().toISOString(), '-(RENDER)-Page3->', Platform.OS);
   return (
     <SafeAreaView style={Styles}>
       <CustomStatusBar />
@@ -22,7 +23,10 @@ export const Page3: React.FC = () => {
             <Text>Page 3</Text>
           </Section>
         </View>
-        <Button title={'goBack'} onPress={goBack} />
+        <Button
+          title={'goBack'}
+          // onPress={goBack}
+        />
       </ScrollView>
     </SafeAreaView>
   );

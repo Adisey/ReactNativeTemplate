@@ -5,12 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Page2 } from './Screens/Page2';
 import { Page1 } from './Screens/Page1';
 import { Platform } from 'react-native';
-
-export type RootStackParamList = {
-  Main: undefined;
-  Page1: undefined;
-  Page2: { from: string } | undefined;
-};
+import { RootStackParamList } from './Navigation/RootStackParamList';
+import { SettingsBottomTabs } from './Navigation/SettingsBottomTabs';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -30,6 +26,7 @@ function App(): Element {
           component={Page2}
           initialParams={{ from: 'App ^^^' }}
         />
+        <Stack.Screen name="Settings" component={SettingsBottomTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
