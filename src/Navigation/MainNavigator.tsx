@@ -17,7 +17,12 @@ export type MainStackParamList = {
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 export function MainNavigator() {
-  console.log(new Date().toISOString(), '-(RENDER)-Main->', Platform.OS, `<--`);
+  console.log(
+    new Date().toISOString(),
+    '-(RENDER)-MainNavigator->',
+    Platform.OS,
+    `<--`,
+  );
   return (
     <NavigationContainer>
       <MainStack.Navigator initialRouteName="PageMain">

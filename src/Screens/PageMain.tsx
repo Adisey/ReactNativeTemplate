@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
@@ -38,7 +45,13 @@ export const PageMain: React.FC = () => {
     console.log(new Date().toISOString(), '-(Button goToSettings)->', `<--`);
     navigation.navigate('Settings');
   };
-  console.log(new Date().toISOString(), '-(RENDER)-Main->', `<--`);
+  console.log(
+    new Date().toISOString(),
+    '-(RENDER)-PageMain->',
+    Platform.OS,
+    isAuth,
+    `<-isAuth-`,
+  );
   return (
     <SafeAreaView style={Styles}>
       <CustomStatusBar />

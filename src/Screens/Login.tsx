@@ -3,12 +3,13 @@ import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
+import { setAuth } from '../middleware';
 import { CustomStatusBar, Section } from '../Components';
 
 export const Login: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<any>();
-  const { isAuth, setAuth } = useAuthStore();
+  const { isAuth } = useAuthStore();
 
   const goBack = () => {
     console.log(new Date().toISOString(), '-(Button goBack Login)->', `<--`);
