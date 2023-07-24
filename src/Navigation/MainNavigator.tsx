@@ -3,12 +3,14 @@ import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Page1, Page2, PageMain } from '../Screens';
+import { Login } from '../Screens/Login';
 import { SettingsBottomTabs } from './SettingsBottomTabs';
 
 export type MainStackParamList = {
   PageMain: undefined;
   Page1: undefined;
   Page2: { from: string } | undefined;
+  Login: undefined;
   Settings: undefined;
 };
 
@@ -30,6 +32,7 @@ export function MainNavigator() {
           component={Page2}
           initialParams={{ from: 'App ^^^' }}
         />
+        <MainStack.Screen name="Login" component={Login} />
         <MainStack.Screen name="Settings" component={SettingsBottomTabs} />
       </MainStack.Navigator>
     </NavigationContainer>

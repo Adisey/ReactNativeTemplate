@@ -6,10 +6,11 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { a } from '../interfaces';
+import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { MainStackParamList } from '../Navigation';
 import { CustomStatusBar, Section } from '../Components';
+import { Login } from './Login';
 
 type MainNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainStackParamList, 'Page2'>,
@@ -19,8 +20,8 @@ type MainNavigationProp = CompositeNavigationProp<
 export const PageMain: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<MainNavigationProp>();
+  const { isAuth } = useAuthStore();
 
-  console.log(Date.now(), '-()->', typeof a, `-a->`, a);
   const goToPage1 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage1)->', `<--`);
     navigation.navigate('Page1');
@@ -29,8 +30,12 @@ export const PageMain: React.FC = () => {
     console.log(new Date().toISOString(), '-(Button goToPage2)->', `<--`);
     navigation.navigate('Page2', { from: 'Page ^Main' });
   };
+  const goToLogin = () => {
+    console.log(new Date().toISOString(), '-(Button goToLogin)->', `<--`);
+    navigation.navigate('Login');
+  };
   const goToSettings = () => {
-    console.log(new Date().toISOString(), '-(Button goToPage3)->', `<--`);
+    console.log(new Date().toISOString(), '-(Button goToSettings)->', `<--`);
     navigation.navigate('Settings');
   };
   console.log(new Date().toISOString(), '-(RENDER)-Main->', `<--`);
@@ -41,9 +46,11 @@ export const PageMain: React.FC = () => {
         <View style={Styles}>
           <Section title="Main Page">
             <Text>Hello ARTEM !</Text>
+            <Text>{`isAuth: ${isAuth}`}</Text>
           </Section>
           <Button title={'Page #1'} onPress={goToPage1} />
           <Button title={'Page #2'} onPress={goToPage2} />
+          <Button title={'Login'} onPress={goToLogin} />
           <Button title={'Settings'} onPress={goToSettings} />
         </View>
       </ScrollView>
