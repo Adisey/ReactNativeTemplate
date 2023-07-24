@@ -7,15 +7,15 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { RootStackParamList } from '../Navigation/RootStackParamList';
+import { MainStackParamList } from '../Navigation/MainNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type MainNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<RootStackParamList, 'Page2'>,
-  StackNavigationProp<RootStackParamList>
+  BottomTabNavigationProp<MainStackParamList, 'Page2'>,
+  StackNavigationProp<MainStackParamList>
 >;
 
-export const Main: React.FC = () => {
+export const PageMain: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<MainNavigationProp>();
   const goToPage1 = () => {

@@ -5,18 +5,18 @@ import { Page4 } from '../Screens/Page4';
 import { Page3 } from '../Screens/Page3';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
-const Tab = createBottomTabNavigator();
+const SettingsStack = createBottomTabNavigator();
 
 export function SettingsBottomTabs() {
   return (
-    <Tab.Navigator
+    <SettingsStack.Navigator
       initialRouteName="Page3"
       screenOptions={{
         tabBarActiveTintColor: '#0000FF',
       }}>
-      <Tab.Screen name="Page3" component={Page3} />
-      <Tab.Screen name="Page4" component={Page4} />
-      <Tab.Screen
+      <SettingsStack.Screen name="Page3" component={Page3} />
+      <SettingsStack.Screen name="Page4" component={Page4} />
+      <SettingsStack.Screen
         name="Page5"
         component={Page5}
         options={{
@@ -26,6 +26,6 @@ export function SettingsBottomTabs() {
           ),
         }}
       />
-    </Tab.Navigator>
+    </SettingsStack.Navigator>
   );
 }

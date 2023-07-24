@@ -18,14 +18,13 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../Navigation/RootStackParamList';
-import { SettingsBottomTabs } from '../Navigation/SettingsBottomTabs';
+import { MainStackParamList } from '../Navigation/MainNavigator';
 
-type Page2ComponentProps = NativeStackScreenProps<RootStackParamList, 'Page2'>;
-type Page2RouteProp = RouteProp<RootStackParamList, 'Page2'>;
+type Page2ComponentProps = NativeStackScreenProps<MainStackParamList, 'Page2'>;
+type Page2RouteProp = RouteProp<MainStackParamList, 'Page2'>;
 type Page2NavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<RootStackParamList, 'Page2'>,
-  StackNavigationProp<RootStackParamList>
+  BottomTabNavigationProp<MainStackParamList, 'Page2'>,
+  StackNavigationProp<MainStackParamList>
 >;
 
 export const Page2: React.FC<Page2ComponentProps> = ({
