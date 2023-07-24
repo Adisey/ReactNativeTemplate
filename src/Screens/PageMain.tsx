@@ -1,14 +1,15 @@
 import React from 'react';
-import { CustomStatusBar, Section } from '../Components';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { useColorThemeStyles } from '../hooks';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   useNavigation,
 } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { MainStackParamList } from '../Navigation/MainNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { a } from '../interfaces';
+import { useColorThemeStyles } from '../hooks';
+import { MainStackParamList } from '../Navigation';
+import { CustomStatusBar, Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainStackParamList, 'Page2'>,
@@ -18,6 +19,8 @@ type MainNavigationProp = CompositeNavigationProp<
 export const PageMain: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<MainNavigationProp>();
+
+  console.log(Date.now(), '-()->', typeof a, `-a->`, a);
   const goToPage1 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage1)->', `<--`);
     navigation.navigate('Page1');

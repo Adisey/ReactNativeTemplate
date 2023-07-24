@@ -1,5 +1,4 @@
 import React from 'react';
-import { CustomStatusBar, Section } from '../Components';
 import {
   Button,
   Platform,
@@ -9,11 +8,12 @@ import {
   View,
 } from 'react-native';
 import { useColorThemeStyles } from '../hooks';
+import { CustomStatusBar, Section } from '../Components';
 
 export const Page3: React.FC = () => {
   const Styles = useColorThemeStyles();
-
   console.log(new Date().toISOString(), '-(RENDER)-Page3->', Platform.OS);
+
   return (
     <SafeAreaView style={Styles}>
       <CustomStatusBar />

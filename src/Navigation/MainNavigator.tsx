@@ -1,9 +1,9 @@
+import React from 'react';
 import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Page1, Page2, PageMain } from '../Screens';
 import { SettingsBottomTabs } from './SettingsBottomTabs';
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type MainStackParamList = {
   PageMain: undefined;

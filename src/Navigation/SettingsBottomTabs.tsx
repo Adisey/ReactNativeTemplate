@@ -1,9 +1,7 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Page5 } from '../Screens/Page5';
-import { Page4 } from '../Screens/Page4';
-import { Page3 } from '../Screens/Page3';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Page3, Page4, Page5 } from '../Screens';
 
 const SettingsStack = createBottomTabNavigator();
 

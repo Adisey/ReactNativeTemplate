@@ -1,5 +1,4 @@
 import React from 'react';
-import { CustomStatusBar, Section } from '../Components';
 import {
   Button,
   Platform,
@@ -8,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { useColorThemeStyles } from '../hooks';
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import {
   CompositeNavigationProp,
   RouteProp,
@@ -16,9 +15,10 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { MainStackParamList } from '../Navigation/MainNavigator';
+import { useColorThemeStyles } from '../hooks';
+import { MainStackParamList } from '../Navigation';
+import { CustomStatusBar, Section } from '../Components';
 
 type Page2ComponentProps = NativeStackScreenProps<MainStackParamList, 'Page2'>;
 type Page2RouteProp = RouteProp<MainStackParamList, 'Page2'>;

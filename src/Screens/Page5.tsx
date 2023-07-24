@@ -1,8 +1,8 @@
 import React from 'react';
-import { CustomStatusBar, Section } from '../Components';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { useColorThemeStyles } from '../hooks';
 import { useNavigation } from '@react-navigation/native';
+import { useColorThemeStyles } from '../hooks';
+import { CustomStatusBar, Section } from '../Components';
 
 export const Page5: React.FC = () => {
   const Styles = useColorThemeStyles();
