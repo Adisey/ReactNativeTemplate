@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
@@ -24,6 +31,13 @@ export const Login: React.FC = () => {
     console.log(new Date().toISOString(), '-(Button logOut Login)->', `<--`);
     setAuth(false);
   };
+  console.log(
+    new Date().toISOString(),
+    '-(RENDER)-Login->',
+    Platform.OS,
+    isAuth,
+    `<-isAuth-`,
+  );
 
   return (
     <SafeAreaView style={Styles}>

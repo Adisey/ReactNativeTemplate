@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
@@ -14,6 +21,14 @@ export const Page5: React.FC = () => {
     console.log(new Date().toISOString(), '-(Button goBack Page5)->', `<--`);
     navigation.goBack();
   };
+
+  console.log(
+    new Date().toISOString(),
+    '-(RENDER)-Page5->',
+    Platform.OS,
+    isAuth,
+    `<-isAuth-`,
+  );
 
   return (
     <SafeAreaView style={Styles}>
