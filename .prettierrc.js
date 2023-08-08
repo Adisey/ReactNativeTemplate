@@ -7,6 +7,7 @@ module.exports = {
   importOrder: [
     '^react(.*)',
     '^@core/(.*)$',
+    '^zustand(.*)',
     '<THIRD_PARTY_MODULES>',
     '/interfaces',
     '/stores',

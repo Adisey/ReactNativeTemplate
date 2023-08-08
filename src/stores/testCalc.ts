@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { AppRegistry } from 'react-native';
 import { GetState, SetState, create } from 'zustand';
-
-import unmountApplicationComponentAtRootTag = AppRegistry.unmountApplicationComponentAtRootTag;
+import { useEffect } from 'react';
 
 interface ITestCalcValueState {
   count: number;
@@ -21,7 +18,7 @@ interface ITestCalcActionsState {
 interface ITestCalcState extends ITestCalcValueState, ITestCalcActionsState {}
 
 export const useTestCalcStore = create<ITestCalcState>()(
-  (set: SetState<ITestCalcState>, get: GetState<ITestCalcState>) => ({
+  (set: SetState<ITestCalcValueState>, get: GetState<ITestCalcValueState>) => ({
     count: 7,
     setInc: () =>
       set((state: ITestCalcValueState) => ({ count: state.count + 1 })),
@@ -32,7 +29,12 @@ export const useTestCalcStore = create<ITestCalcState>()(
     setInc2: () =>
       set((state: ITestCalcValueState) => ({ count2: state.count2 + 1 })),
     setDec2: () =>
-      set((state: ITestCalcValueState) => ({ count2: state.count2 - 1 })),
+      set(() => {
+        const val = get().count2 - 1;
+        return {
+          count2: val,
+        };
+      }),
     setCount2: (n: number) => set(() => ({ count2: n })),
   }),
 );
