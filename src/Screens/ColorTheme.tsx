@@ -45,6 +45,7 @@ export const ColorTheme: React.FC = () => {
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   input: {
     height: 40,

@@ -2,22 +2,36 @@ import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ColorTheme, Page3, Page5 } from '../Screens';
-import { Login } from '../Screens/Login';
+import { ColorTheme, InfoPage, Login, ReactionPage } from '../Screens';
 
-const SettingsStack = createBottomTabNavigator();
+export type BottomTabsStackParamList = {
+  ColorTheme: undefined;
+  InfoPage: undefined;
+  Login: undefined;
+  ReactionPage: undefined;
+};
+
+const SettingsStack = createBottomTabNavigator<BottomTabsStackParamList>();
 
 export function SettingsBottomTabs() {
   return (
     <SettingsStack.Navigator
-      initialRouteName="Page3"
+      initialRouteName="ReactionPage"
       screenOptions={{
         tabBarActiveTintColor: '#0000FF',
       }}>
-      <SettingsStack.Screen name="Page3" component={Page3} />
       <SettingsStack.Screen
-        name="Page5"
-        component={Page5}
+        name="ReactionPage"
+        component={ReactionPage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesignIcons name="dashboard" color={color} size={size} />
+          ),
+        }}
+      />
+      <SettingsStack.Screen
+        name="InfoPage"
+        component={InfoPage}
         options={{
           tabBarLabel: 'Info',
           tabBarIcon: ({ color, size }) => (

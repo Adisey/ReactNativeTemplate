@@ -12,19 +12,19 @@ import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { CustomStatusBar, Section } from '../Components';
 
-export const Page5: React.FC = () => {
+export const InfoPage: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<any>();
   const { isAuth } = useAuthStore();
 
   const goBack = () => {
-    console.log(new Date().toISOString(), '-(Button goBack Page5)->', `<--`);
+    console.log(new Date().toISOString(), '-(Button goBack InfoPage)->', `<--`);
     navigation.goBack();
   };
 
   console.log(
     new Date().toISOString(),
-    '-(RENDER)-Page5->',
+    '-(RENDER)-InfoPage->',
     Platform.OS,
     isAuth,
     `<-isAuth-`,

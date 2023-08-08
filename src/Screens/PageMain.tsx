@@ -17,7 +17,6 @@ import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { MainStackParamList } from '../Navigation';
 import { CustomStatusBar, Section } from '../Components';
-import { Login } from './Login';
 
 type MainNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainStackParamList, 'Page2'>,
@@ -36,10 +35,6 @@ export const PageMain: React.FC = () => {
   const goToPage2 = () => {
     console.log(new Date().toISOString(), '-(Button goToPage2)->', `<--`);
     navigation.navigate('Page2', { from: 'Page ^Main' });
-  };
-  const goToLogin = () => {
-    console.log(new Date().toISOString(), '-(Button goToLogin)->', `<--`);
-    navigation.navigate('Login');
   };
   const goToSettings = () => {
     console.log(new Date().toISOString(), '-(Button goToSettings)->', `<--`);
@@ -63,7 +58,6 @@ export const PageMain: React.FC = () => {
           </Section>
           <Button title={'Page #1'} onPress={goToPage1} />
           <Button title={'Page #2'} onPress={goToPage2} />
-          <Button title={'Login'} onPress={goToLogin} />
           <Button title={'Settings'} onPress={goToSettings} />
         </View>
       </ScrollView>
