@@ -9,11 +9,11 @@ export enum ColorTheme {
 interface IUiState {
   colorTheme: ColorTheme;
 }
-interface IUiSetState {
+interface IUiActionsState {
   setStoreColorTheme: (theme: ColorTheme) => void;
 }
 
-export const useUiStore = create<IUiState & IUiSetState>()(set => ({
+export const useUiStore = create<IUiState & IUiActionsState>()(set => ({
   colorTheme: 0,
   setStoreColorTheme: (theme: ColorTheme) =>
     set((state: IUiState) => ({ ...state, colorTheme: theme })),

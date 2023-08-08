@@ -13,6 +13,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { testCalcMiddleWare, useTestCalcHook } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { BottomTabsStackParamList } from '../Navigation';
 import { CustomStatusBar, Section } from '../Components';
@@ -25,18 +26,21 @@ type ProfileScreenNavigationProp = CompositeNavigationProp<
 export const ReactionPage: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<ProfileScreenNavigationProp>();
+  const { count, countCalc, count2 } = useTestCalcHook();
+
+  const { setInc, setDec } = testCalcMiddleWare();
+
   console.log(
     new Date().toISOString(),
     '-(RENDER)-ReactionPage->',
     Platform.OS,
+    'count->',
+    count,
+    'countCalc->',
+    countCalc,
   );
 
   const goBack = () => {
-    console.log(
-      new Date().toISOString(),
-      '-(Button goBack ReactionPage)->',
-      `<--`,
-    );
     navigation.goBack();
   };
 
@@ -45,8 +49,24 @@ export const ReactionPage: React.FC = () => {
       <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="Section 1">
-            <Text>text</Text>
+          <Section title="count">
+            <Text>{count}</Text>
+          </Section>
+          <Section title="countCalc">
+            <Text>{countCalc}</Text>
+          </Section>
+          <Section title="Actions">
+            <Button title={'(+)'} onPress={setInc} />
+            <Text> </Text>
+            <Button title={'(-)'} onPress={setDec} />
+          </Section>
+          <Section title="count2">
+            <Text>{count2}</Text>
+          </Section>
+          <Section title="Actions2">
+            <Button title={'(+)'} onPress={testCalcMiddleWare().setInc2} />
+            <Text> </Text>
+            <Button title={'(-)'} onPress={testCalcMiddleWare().setDec2} />
           </Section>
         </View>
         <Button title={'goBack'} onPress={goBack} />

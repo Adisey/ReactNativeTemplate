@@ -6,7 +6,6 @@ module.exports = {
   trailingComma: 'all',
   importOrder: [
     '^react(.*)',
-    'antd/(.*)',
     '^@core/(.*)$',
     '<THIRD_PARTY_MODULES>',
     '/interfaces',
@@ -16,8 +15,8 @@ module.exports = {
     '/Navigation',
     '/Screens',
     '/Components',
-    '^[./]',
     '/Styles',
+    '^[./]',
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: true,

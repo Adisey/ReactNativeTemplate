@@ -19,7 +19,7 @@ import { MainStackParamList } from '../Navigation';
 import { CustomStatusBar, Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<MainStackParamList, 'Page2'>,
+  BottomTabNavigationProp<MainStackParamList, 'PageMain'>,
   StackNavigationProp<MainStackParamList>
 >;
 
