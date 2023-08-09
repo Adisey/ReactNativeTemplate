@@ -45,9 +45,13 @@ export const Login: React.FC = () => {
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Login">
-            <Text>{`isAuth: ${isAuth}`}</Text>
             <Button title={'Login'} onPress={logIn} />
+          </Section>
+          <Section title="LogOut">
             <Button title={'LogOut'} onPress={logOut} />
+          </Section>
+          <Section title="Status">
+            <Text>{`isAuth: ${isAuth}`}</Text>
           </Section>
         </View>
         <Button title={'goBack'} onPress={goBack} />

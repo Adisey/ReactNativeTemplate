@@ -10,6 +10,7 @@ module.exports = {
     '^zustand(.*)',
     '<THIRD_PARTY_MODULES>',
     '/interfaces',
+    '/db',
     '/stores',
     '/hooks',
     '/middleware',

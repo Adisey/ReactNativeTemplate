@@ -43,7 +43,7 @@ export function SettingsBottomTabs() {
         name="ColorTheme"
         component={ColorTheme}
         options={{
-          tabBarLabel: 'Login',
+          tabBarLabel: 'Theme',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="theme-light-dark"
