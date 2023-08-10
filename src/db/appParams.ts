@@ -21,7 +21,9 @@ export const getAllParams = async (): Promise<IAppParamsItem[]> => {
   return res.rows.raw().map(i => i) || [];
 };
 
-const getParams = async (name: IAppParamName): Promise<IAppParamValue> => {
+export const getParams = async (
+  name: IAppParamName,
+): Promise<IAppParamValue> => {
   const res = await queryAsync('SELECT * FROM app_params WHERE name = ?', [
     name,
   ]);

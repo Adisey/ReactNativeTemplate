@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   SafeAreaView,
@@ -8,17 +8,23 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { getParams } from '../db';
 import { useUiStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { setColorTheme } from '../middleware';
 import { CustomStatusBar, Section } from '../Components';
 
 export const ColorTheme: React.FC = () => {
+  const [dbValue, setDbValue] = useState<string>('');
   const Styles = useColorThemeStyles();
   const { colorTheme } = useUiStore();
-
   const [number, onChangeNumber] = useState('');
 
+  useEffect(() => {
+    getParams('colorTheme').then(value => {
+      value && setDbValue(value);
+    });
+  }, []);
   const setColor = () => {
     setColorTheme(number);
   };
@@ -39,6 +45,9 @@ export const ColorTheme: React.FC = () => {
 
           <Section title="Current">
             <Text>{colorTheme}</Text>
+          </Section>
+          <Section title="DB Value">
+            <Text>{dbValue}</Text>
           </Section>
         </View>
       </ScrollView>

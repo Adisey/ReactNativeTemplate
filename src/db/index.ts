@@ -8,11 +8,12 @@ import { createAppParamsTables } from './appParams';
 
 export * from './appParams';
 
-const dbName = 'db_sqlite';
+const dbName = 'app_sqlite.db';
 export const db = openDatabase(
   {
     name: dbName,
     location: 'Library',
+    // createFromLocation: '~data/app_db_file.sqlite',
   },
   () => {
     console.log(new Date().toISOString(), dbName, `connection successful`);

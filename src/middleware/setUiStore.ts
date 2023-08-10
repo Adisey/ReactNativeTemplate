@@ -1,15 +1,9 @@
-import { getAllParams, saveParams } from '../db';
+import { saveParams } from '../db';
 import { ColorTheme, useUiStore } from '../stores';
 
 const saveColorTheme = async (value: string): Promise<void> => {
-  console.log(Date.now(), `--(*************************************)-  ->`);
   const bbb = await saveParams('colorTheme', value);
-  console.log(Date.now(), '-(+++++++)->', typeof bbb, `-bbb->`, bbb);
-  // const aaa = await getAllParams();
-  // console.log(Date.now(), '-(ALL)-^^^^^^^^^^^^^^^^^^->', aaa.length);
-  // aaa.forEach(i => {
-  //   console.log(Date.now(), '-(Item)-^^^->', typeof i, `-i->`, i);
-  // });
+  console.log(Date.now(), '-(Saved object)->', `-bbb->`, bbb);
 };
 
 export const setColorTheme = (theme: string) => {
