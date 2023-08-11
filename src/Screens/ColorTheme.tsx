@@ -1,65 +1,113 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import { getParams } from '../db';
+import React from 'react';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import OcticonsIcons from 'react-native-vector-icons/Octicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import { Button } from '@rneui/themed';
+import { IColorTheme } from '../interfaces/colorTheme';
 import { useUiStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { setColorTheme } from '../middleware';
 import { CustomStatusBar, Section } from '../Components';
+import { ColorThemeButtonStyles } from '../Styles';
 
 export const ColorTheme: React.FC = () => {
-  const [dbValue, setDbValue] = useState<string>('');
   const Styles = useColorThemeStyles();
   const { colorTheme } = useUiStore();
-  const [number, onChangeNumber] = useState('');
 
-  useEffect(() => {
-    getParams('colorTheme').then(value => {
-      value && setDbValue(value);
-    });
-  }, []);
-  const setColor = () => {
-    setColorTheme(number);
-  };
+  const isDefault = colorTheme === IColorTheme.DEFAULT;
+  const isDark = colorTheme === IColorTheme.DARK;
+  const isLight = colorTheme === IColorTheme.LIGHT;
 
   return (
     <SafeAreaView style={Styles}>
       <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeNumber}
-            value={number}
-            placeholder="0-default, 1-Light, 2-Dark"
-            keyboardType="numeric"
-          />
-          <Button title={'Save'} onPress={setColor} />
-
-          <Section title="Current">
+          <Section title="Current Color Theme">
             <Text>{colorTheme}</Text>
           </Section>
-          <Section title="DB Value">
-            <Text>{dbValue}</Text>
-          </Section>
+          <View style={ColorThemeButtonStyles.colorThemeView}>
+            <Button
+              buttonStyle={[
+                ColorThemeButtonStyles.colorTheme,
+                isDefault ? ColorThemeButtonStyles.colorThemeCurrent : {},
+              ]}
+              disabled={isDefault}
+              onPress={() => setColorTheme('DEFAULT')}>
+              <SimpleLineIcons
+                name="screen-smartphone"
+                style={[
+                  ColorThemeButtonStyles.buttonText,
+                  ColorThemeButtonStyles.colorThemeIcon,
+                  ColorThemeButtonStyles.colorThemeDefaultText,
+                  isDefault ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}
+              />
+              <Text
+                style={[
+                  ColorThemeButtonStyles.buttonText,
+                  ColorThemeButtonStyles.primaryButtonText,
+                  ColorThemeButtonStyles.colorThemeDefaultText,
+                  isDefault ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}>
+                System
+              </Text>
+            </Button>
+            <Button
+              buttonStyle={[
+                ColorThemeButtonStyles.colorTheme,
+                ColorThemeButtonStyles.colorThemeDark,
+                isDark ? ColorThemeButtonStyles.colorThemeCurrent : {},
+              ]}
+              disabled={isDark}
+              onPress={() => setColorTheme('DARK')}>
+              <OcticonsIcons
+                name="moon"
+                style={[
+                  ColorThemeButtonStyles.colorThemeDarkText,
+                  ColorThemeButtonStyles.buttonText,
+                  ColorThemeButtonStyles.colorThemeIcon,
+                  isDark ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}
+              />
+              <Text
+                style={[
+                  ColorThemeButtonStyles.colorThemeDarkText,
+                  ColorThemeButtonStyles.buttonText,
+                  isDark ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}>
+                Dark
+              </Text>
+            </Button>
+            <Button
+              buttonStyle={[
+                ColorThemeButtonStyles.colorThemeLight,
+                ColorThemeButtonStyles.colorTheme,
+                isLight ? ColorThemeButtonStyles.colorThemeCurrent : {},
+              ]}
+              disabled={isLight}
+              onPress={() => setColorTheme('LIGHT')}>
+              <OcticonsIcons
+                name="sun"
+                style={[
+                  ColorThemeButtonStyles.colorThemeLightText,
+                  ColorThemeButtonStyles.buttonText,
+                  ColorThemeButtonStyles.colorThemeIcon,
+                  isLight ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}
+              />
+              <Text
+                style={[
+                  ColorThemeButtonStyles.colorThemeLightText,
+                  ColorThemeButtonStyles.buttonText,
+                  isLight ? ColorThemeButtonStyles.colorThemeCurrentText : {},
+                ]}>
+                Light
+              </Text>
+            </Button>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});

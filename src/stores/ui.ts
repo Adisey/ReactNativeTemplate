@@ -1,20 +1,15 @@
 import { create } from 'zustand';
-
-export enum ColorTheme {
-  DEFAULT = 0,
-  LIGHT = 1,
-  DARK = 2,
-}
+import { IColorTheme, IColorThemeTypes } from '../interfaces/colorTheme';
 
 interface IUiState {
-  colorTheme: ColorTheme;
+  colorTheme: IColorTheme;
 }
 interface IUiActionsState {
-  setStoreColorTheme: (theme: ColorTheme) => void;
+  setStoreColorTheme: (theme: IColorThemeTypes) => void;
 }
 
 export const useUiStore = create<IUiState & IUiActionsState>()(set => ({
-  colorTheme: 0,
-  setStoreColorTheme: (theme: ColorTheme) =>
-    set((state: IUiState) => ({ ...state, colorTheme: theme })),
+  colorTheme: IColorTheme.DEFAULT,
+  setStoreColorTheme: (theme: IColorThemeTypes) =>
+    set((state: IUiState) => ({ ...state, colorTheme: IColorTheme[theme] })),
 }));
