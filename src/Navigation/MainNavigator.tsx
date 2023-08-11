@@ -1,7 +1,8 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Theme } from '@react-navigation/native/src/types';
+import { useColorThemeStyles, useIsDarkMode } from '../hooks';
 import { Page1, Page2, PageMain } from '../Screens';
 import { SettingsBottomTabs } from './SettingsBottomTabs';
 
@@ -15,14 +16,21 @@ export type MainStackParamList = {
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 export function MainNavigator() {
-  console.log(
-    new Date().toISOString(),
-    '-(RENDER)-MainNavigator->',
-    Platform.OS,
-    `<--`,
-  );
+  const isDarkMode = useIsDarkMode();
+  const { backgroundColor, color } = useColorThemeStyles();
+
+  const MyTheme: Theme = {
+    dark: isDarkMode,
+    colors: {
+      ...DefaultTheme.colors,
+      background: backgroundColor,
+      card: backgroundColor,
+      text: color,
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <MainStack.Navigator initialRouteName="PageMain">
         <MainStack.Screen
           name="PageMain"

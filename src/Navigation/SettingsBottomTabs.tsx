@@ -15,16 +15,16 @@ export type BottomTabsStackParamList = {
 const SettingsStack = createBottomTabNavigator<BottomTabsStackParamList>();
 
 export function SettingsBottomTabs() {
-  const styles = useColorThemeStyles();
+  const { backgroundColor, color } = useColorThemeStyles();
 
   return (
     <SettingsStack.Navigator
       initialRouteName="ReactionPage"
       screenOptions={{
-        tabBarActiveBackgroundColor: styles.backgroundColor,
-        tabBarActiveTintColor: '#0000FF',
-        tabBarInactiveBackgroundColor: styles.backgroundColor,
-        tabBarInactiveTintColor: styles.color,
+        tabBarActiveBackgroundColor: backgroundColor,
+        tabBarActiveTintColor: 'rgb(0, 122, 255)',
+        tabBarInactiveBackgroundColor: backgroundColor,
+        tabBarInactiveTintColor: color,
       }}>
       <SettingsStack.Screen
         name="ReactionPage"
