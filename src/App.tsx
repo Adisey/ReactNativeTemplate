@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { IColorThemeTypes } from './interfaces/colorTheme';
 import { createTables, getParams } from './db';
 import { setColorThemeStore } from './middleware';
 import { MainNavigator } from './Navigation';
-import { Loader } from './Components';
+import { CustomStatusBar, Loader } from './Components';
 
 function App(): Element {
   const [isInitialised, setInitialised] = useState<boolean>(false);
@@ -17,7 +19,14 @@ function App(): Element {
     });
   }, []);
 
-  return isInitialised ? <MainNavigator /> : <Loader />;
+  return (
+    <SafeAreaProvider>
+      <View style={{ flex: 1, backgroundColor: 'blue' }}>
+        <CustomStatusBar />
+        {isInitialised ? <MainNavigator /> : <Loader />}
+      </View>
+    </SafeAreaProvider>
+  );
 }
 
 export default App;

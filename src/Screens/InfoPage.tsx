@@ -32,7 +32,6 @@ export const InfoPage: React.FC = () => {
 
   return (
     <SafeAreaView style={Styles}>
-      <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Page 5">

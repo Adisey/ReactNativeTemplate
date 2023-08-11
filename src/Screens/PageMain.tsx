@@ -16,7 +16,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { MainStackParamList } from '../Navigation';
-import { CustomStatusBar, Section } from '../Components';
+import { Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainStackParamList, 'PageMain'>,
@@ -49,7 +49,6 @@ export const PageMain: React.FC = () => {
   );
   return (
     <SafeAreaView style={Styles}>
-      <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Main Page">

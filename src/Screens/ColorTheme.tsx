@@ -7,7 +7,7 @@ import { IColorTheme } from '../interfaces/colorTheme';
 import { useUiStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { setColorTheme } from '../middleware';
-import { CustomStatusBar, Section } from '../Components';
+import { Section } from '../Components';
 import { ColorThemeButtonStyles } from '../Styles';
 
 export const ColorTheme: React.FC = () => {
@@ -20,7 +20,6 @@ export const ColorTheme: React.FC = () => {
 
   return (
     <SafeAreaView style={Styles}>
-      <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Current Color Theme">

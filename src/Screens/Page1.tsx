@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useColorThemeStyles } from '../hooks';
-import { CustomStatusBar, Section } from '../Components';
+import { Section } from '../Components';
 
 export const Page1: React.FC = () => {
   const Styles = useColorThemeStyles();
@@ -20,7 +20,6 @@ export const Page1: React.FC = () => {
 
   return (
     <SafeAreaView style={Styles}>
-      <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Page 1">

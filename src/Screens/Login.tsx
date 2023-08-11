@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { setAuth } from '../middleware';
-import { CustomStatusBar, Section } from '../Components';
+import { Section } from '../Components';
 
 export const Login: React.FC = () => {
   const Styles = useColorThemeStyles();
@@ -41,7 +41,6 @@ export const Login: React.FC = () => {
 
   return (
     <SafeAreaView style={Styles}>
-      <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
           <Section title="Login">

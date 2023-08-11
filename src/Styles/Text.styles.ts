@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const TextStyles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
     paddingHorizontal: 24,
+    paddingVertical: 12,
   },
   sectionTitle: {
     fontSize: 24,
