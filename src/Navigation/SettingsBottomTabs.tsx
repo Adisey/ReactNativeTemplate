@@ -2,6 +2,7 @@ import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useColorThemeStyles } from '../hooks';
 import { ColorTheme, InfoPage, Login, ReactionPage } from '../Screens';
 
 export type BottomTabsStackParamList = {
@@ -14,11 +15,16 @@ export type BottomTabsStackParamList = {
 const SettingsStack = createBottomTabNavigator<BottomTabsStackParamList>();
 
 export function SettingsBottomTabs() {
+  const styles = useColorThemeStyles();
+
   return (
     <SettingsStack.Navigator
       initialRouteName="ReactionPage"
       screenOptions={{
+        tabBarActiveBackgroundColor: styles.backgroundColor,
         tabBarActiveTintColor: '#0000FF',
+        tabBarInactiveBackgroundColor: styles.backgroundColor,
+        tabBarInactiveTintColor: styles.color,
       }}>
       <SettingsStack.Screen
         name="ReactionPage"
