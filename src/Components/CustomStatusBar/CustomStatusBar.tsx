@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useColorThemeStyles, useIsDarkMode } from '../hooks';
+import { useColorThemeStyles, useIsDarkMode } from '../../hooks';
 
 export const CustomStatusBar: React.FC = () => {
   const isDarkMode = useIsDarkMode();

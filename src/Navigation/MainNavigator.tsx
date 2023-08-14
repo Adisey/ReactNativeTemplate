@@ -3,11 +3,11 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Theme } from '@react-navigation/native/src/types';
 import { useColorThemeStyles, useIsDarkMode } from '../hooks';
-import { Page1, Page2, PageMain } from '../Screens';
+import { MainScreen, Page1, Page2 } from '../Screens';
 import { SettingsBottomTabs } from './SettingsBottomTabs';
 
 export type MainStackParamList = {
-  PageMain: undefined;
+  MainScreen: undefined;
   Page1: undefined;
   Page2: { from: string } | undefined;
   Settings: undefined;
@@ -31,10 +31,10 @@ export function MainNavigator() {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <MainStack.Navigator initialRouteName="PageMain">
+      <MainStack.Navigator initialRouteName="MainScreen">
         <MainStack.Screen
-          name="PageMain"
-          component={PageMain}
+          name="MainScreen"
+          component={MainScreen}
           options={{ title: 'Main Page' }}
         />
         <MainStack.Screen name="Page1" component={Page1} />

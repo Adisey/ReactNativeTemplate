@@ -16,14 +16,14 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { MainStackParamList } from '../Navigation';
-import { Section } from '../Components';
+import { Logo, Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainStackParamList, 'PageMain'>,
   StackNavigationProp<MainStackParamList>
 >;
 
-export const PageMain: React.FC = () => {
+export const MainScreen: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<MainNavigationProp>();
   const { isAuth } = useAuthStore();
@@ -55,6 +55,7 @@ export const PageMain: React.FC = () => {
             <Text>Hello ARTEM !</Text>
             <Text>{`isAuth: ${isAuth}`}</Text>
           </Section>
+          <Logo />
           <Button title={'Page #1'} onPress={goToPage1} />
           <Button title={'Page #2'} onPress={goToPage2} />
           <Button title={'Settings'} onPress={goToSettings} />

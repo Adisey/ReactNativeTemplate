@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Text, View } from 'react-native';
-import { useColorThemeStyles } from '../hooks';
-import { TextStyles } from '../Styles';
+import { useColorThemeStyles } from '../../hooks';
+import { TextStyles } from '../../Styles';
 
 type SectionProps = PropsWithChildren<{
   title: string;
