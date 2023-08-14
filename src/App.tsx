@@ -3,7 +3,7 @@ import { Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAuthStore } from './stores';
 import { initApp } from './middleware/app';
-import { MainNavigator } from './Navigation';
+import { MainNavigator, SettingsBottomTabs } from './Navigation';
 import { LogIn } from './Screens';
 import { CustomStatusBar, Loader } from './Components';
 
@@ -29,7 +29,15 @@ function App(): Element {
     <SafeAreaProvider>
       <View style={{ flex: 1 }}>
         <CustomStatusBar />
-        {isInitialised ? isAuth ? <MainNavigator /> : <LogIn /> : <Loader />}
+        {isInitialised ? (
+          isAuth ? (
+            <SettingsBottomTabs />
+          ) : (
+            <LogIn />
+          )
+        ) : (
+          <Loader />
+        )}
       </View>
     </SafeAreaProvider>
   );

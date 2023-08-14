@@ -19,7 +19,7 @@ import { MainStackParamList } from '../Navigation';
 import { Logo, Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<MainStackParamList, 'PageMain'>,
+  BottomTabNavigationProp<MainStackParamList, 'MainScreen'>,
   StackNavigationProp<MainStackParamList>
 >;
 
