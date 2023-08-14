@@ -3,12 +3,12 @@ import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useColorThemeStyles } from '../hooks';
-import { ColorTheme, InfoPage, Login, ReactionPage } from '../Screens';
+import { ColorTheme, InfoPage, LogOut, ReactionPage } from '../Screens';
 
 export type BottomTabsStackParamList = {
   ColorTheme: undefined;
   InfoPage: undefined;
-  Login: undefined;
+  LogOut: undefined;
   ReactionPage: undefined;
 };
 
@@ -60,12 +60,12 @@ export function SettingsBottomTabs() {
         }}
       />
       <SettingsStack.Screen
-        name="Login"
-        component={Login}
+        name="LogOut"
+        component={LogOut}
         options={{
-          tabBarLabel: 'Login',
+          tabBarLabel: 'LogOut',
           tabBarIcon: ({ color, size }) => (
-            <AntDesignIcons name="login" color={color} size={size} />
+            <AntDesignIcons name="logout" color={color} size={size} />
           ),
         }}
       />

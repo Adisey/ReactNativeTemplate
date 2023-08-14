@@ -10,10 +10,10 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
-import { setAuth } from '../middleware';
+import { setLogOut, setLogin } from '../middleware';
 import { Section } from '../Components';
 
-export const Login: React.FC = () => {
+export const LogOut: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<any>();
   const { isAuth } = useAuthStore();
@@ -23,17 +23,13 @@ export const Login: React.FC = () => {
     navigation.goBack();
   };
 
-  const logIn = () => {
-    console.log(new Date().toISOString(), '-(Button logIn Login)->', `<--`);
-    setAuth(true);
-  };
   const logOut = () => {
     console.log(new Date().toISOString(), '-(Button logOut Login)->', `<--`);
-    setAuth(false);
+    setLogOut();
   };
   console.log(
     new Date().toISOString(),
-    '-(RENDER)-Login->',
+    '-(RENDER)-LogOut->',
     Platform.OS,
     isAuth,
     `<-isAuth-`,
@@ -43,9 +39,6 @@ export const Login: React.FC = () => {
     <SafeAreaView style={Styles}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="Login">
-            <Button title={'Login'} onPress={logIn} />
-          </Section>
           <Section title="LogOut">
             <Button title={'LogOut'} onPress={logOut} />
           </Section>
