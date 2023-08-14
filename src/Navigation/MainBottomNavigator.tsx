@@ -1,29 +1,27 @@
 import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { Theme } from '@react-navigation/native/src/types';
-import { useColorThemeStyles, useIsDarkMode } from '../hooks';
+import { NavigationContainer } from '@react-navigation/native';
+import { useColorThemeStyles } from '../hooks';
 import { useNavigatorTheme } from '../hooks/useNavigatorTheme';
-import { ColorTheme, InfoPage, LogOut, ReactionPage } from '../Screens';
+import { InfoPage, ReactionPage, SettingScreen } from '../Screens';
 
 export type BottomTabsStackParamList = {
-  ColorTheme: undefined;
+  Setting: undefined;
   InfoPage: undefined;
-  LogOut: undefined;
   ReactionPage: undefined;
 };
 
-const SettingsStack = createBottomTabNavigator<BottomTabsStackParamList>();
+const MainBottomNavigatorStack =
+  createBottomTabNavigator<BottomTabsStackParamList>();
 
-export function SettingsBottomTabs() {
+export function MainBottomNavigator() {
   const { backgroundColor, color } = useColorThemeStyles();
   const navigationTheme = useNavigatorTheme();
 
   return (
     <NavigationContainer theme={navigationTheme}>
-      <SettingsStack.Navigator
+      <MainBottomNavigatorStack.Navigator
         initialRouteName="ReactionPage"
         screenOptions={{
           tabBarActiveBackgroundColor: backgroundColor,
@@ -31,7 +29,7 @@ export function SettingsBottomTabs() {
           tabBarInactiveBackgroundColor: backgroundColor,
           tabBarInactiveTintColor: color,
         }}>
-        <SettingsStack.Screen
+        <MainBottomNavigatorStack.Screen
           name="ReactionPage"
           component={ReactionPage}
           options={{
@@ -40,7 +38,7 @@ export function SettingsBottomTabs() {
             ),
           }}
         />
-        <SettingsStack.Screen
+        <MainBottomNavigatorStack.Screen
           name="InfoPage"
           component={InfoPage}
           options={{
@@ -50,31 +48,17 @@ export function SettingsBottomTabs() {
             ),
           }}
         />
-        <SettingsStack.Screen
-          name="ColorTheme"
-          component={ColorTheme}
+        <MainBottomNavigatorStack.Screen
+          name="Setting"
+          component={SettingScreen}
           options={{
-            tabBarLabel: 'Theme',
+            tabBarLabel: 'setting',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="theme-light-dark"
-                color={color}
-                size={size}
-              />
+              <AntDesignIcons name="setting" color={color} size={size} />
             ),
           }}
         />
-        <SettingsStack.Screen
-          name="LogOut"
-          component={LogOut}
-          options={{
-            tabBarLabel: 'LogOut',
-            tabBarIcon: ({ color, size }) => (
-              <AntDesignIcons name="logout" color={color} size={size} />
-            ),
-          }}
-        />
-      </SettingsStack.Navigator>
+      </MainBottomNavigatorStack.Navigator>
     </NavigationContainer>
   );
 }

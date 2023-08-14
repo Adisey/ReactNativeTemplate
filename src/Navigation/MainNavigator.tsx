@@ -5,7 +5,7 @@ import { Theme } from '@react-navigation/native/src/types';
 import { useColorThemeStyles, useIsDarkMode } from '../hooks';
 import { useNavigatorTheme } from '../hooks/useNavigatorTheme';
 import { MainScreen, Page1, Page2 } from '../Screens';
-import { SettingsBottomTabs } from './SettingsBottomTabs';
+import { MainBottomNavigator } from './MainBottomNavigator';
 
 export type MainStackParamList = {
   MainScreen: undefined;
@@ -17,7 +17,6 @@ export type MainStackParamList = {
 const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 // ToDo: 14.08.2023 - Left only for example ;)
-
 
 export function MainNavigator() {
   const navigationTheme = useNavigatorTheme();
@@ -35,7 +34,7 @@ export function MainNavigator() {
           component={Page2}
           initialParams={{ from: 'App ^^^' }}
         />
-        <MainStack.Screen name="Settings" component={SettingsBottomTabs} />
+        <MainStack.Screen name="Settings" component={MainBottomNavigator} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

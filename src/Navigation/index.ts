@@ -1,2 +1,2 @@
 export * from './MainNavigator';
-export * from './SettingsBottomTabs';
+export * from './MainBottomNavigator';
