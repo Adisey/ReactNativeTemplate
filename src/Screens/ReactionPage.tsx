@@ -49,24 +49,44 @@ export const ReactionPage: React.FC = () => {
       <CustomStatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="count">
-            <Text>{count}</Text>
+          <Section
+            title="FIRST Counter"
+            materialCommunityIconsName={'numeric-1-circle-outline'}>
+            <Text style={Styles}>count: {count}</Text>
+            <Text style={Styles}>countCalc: {countCalc}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginVertical: 20,
+                padding: 10,
+              }}>
+              <Button title={'(+) Increment'} onPress={setInc} />
+              <Button title={'(-) Decrement'} onPress={setDec} />
+            </View>
           </Section>
-          <Section title="countCalc">
-            <Text>{countCalc}</Text>
-          </Section>
-          <Section title="Actions">
-            <Button title={'(+)'} onPress={setInc} />
-            <Text> </Text>
-            <Button title={'(-)'} onPress={setDec} />
-          </Section>
-          <Section title="count2">
-            <Text>{count2}</Text>
-          </Section>
-          <Section title="Actions2">
-            <Button title={'(+)'} onPress={testCalcMiddleWare().setInc2} />
-            <Text> </Text>
-            <Button title={'(-)'} onPress={testCalcMiddleWare().setDec2} />
+          <Section
+            title="Second Counter"
+            materialCommunityIconsName={'numeric-2-circle-outline'}>
+            <Text style={Styles}>countCalc: {countCalc}</Text>
+            <Text style={Styles}>count2: {count2}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginVertical: 20,
+                padding: 10,
+              }}>
+              <Button
+                title={'(+) Increment'}
+                onPress={testCalcMiddleWare().setInc2}
+              />
+              <Text> </Text>
+              <Button
+                title={'(-) Decrement'}
+                onPress={testCalcMiddleWare().setDec2}
+              />
+            </View>
           </Section>
         </View>
         <Button title={'goBack'} onPress={goBack} />

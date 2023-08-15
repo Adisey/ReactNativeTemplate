@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  Button,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Button, SafeAreaView, ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
-import { CustomStatusBar, Section } from '../Components';
+import { Section } from '../Components';
 
 export const InfoPage: React.FC = () => {
   const Styles = useColorThemeStyles();
@@ -22,21 +15,11 @@ export const InfoPage: React.FC = () => {
     navigation.goBack();
   };
 
-  console.log(
-    new Date().toISOString(),
-    '-(RENDER)-InfoPage->',
-    Platform.OS,
-    isAuth,
-    `<-isAuth-`,
-  );
-
   return (
     <SafeAreaView style={Styles}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="Page 5">
-            <Text>{`isAuth: ${isAuth}`}</Text>
-          </Section>
+          <Section title="InfoPage">{`isAuth: ${isAuth}`}</Section>
         </View>
         <Button title={'goBack'} onPress={goBack} />
       </ScrollView>

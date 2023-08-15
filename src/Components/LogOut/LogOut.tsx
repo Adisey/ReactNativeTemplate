@@ -16,11 +16,11 @@ export const LogOut: React.FC = () => {
 
   return (
     <View style={Styles}>
-      <Section title="LogOut"></Section>
-      <Section title="Status">
-        <Text>{`isAuth: ${isAuth}`}</Text>
+      <Section title="Status" materialCommunityIconsName={'logout-variant'}>
+        <Text
+          style={[Styles, { marginBottom: 10 }]}>{`isAuth: ${isAuth}`}</Text>
+        <Button title={'LogOut'} onPress={logOut} />
       </Section>
-      <Button title={'LogOut'} onPress={logOut} />
     </View>
   );
 };

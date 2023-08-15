@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import OcticonsIcons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { Button } from '@rneui/themed';
@@ -19,8 +19,10 @@ export const SelectColorTheme: React.FC = () => {
 
   return (
     <View style={Styles}>
-      <Section title="Current Color Theme">
-        <Text>{colorTheme}</Text>
+      <Section
+        title="Current Color Theme"
+        materialCommunityIconsName={'theme-light-dark'}>
+        {colorTheme}
       </Section>
       <View style={ColorThemeButtonStyles.colorThemeView}>
         <Button

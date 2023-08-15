@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAuthStore } from './stores';
 import { initApp } from './middleware/app';
-import { MainBottomNavigator, MainNavigator } from './Navigation';
+import { MainBottomNavigator } from './Navigation';
 import { LogIn } from './Screens';
 import { CustomStatusBar, Loader } from './Components';
 
@@ -14,16 +14,6 @@ function App(): Element {
   useEffect(() => {
     initApp().then(() => setInitialised(true));
   }, []);
-
-  console.log(
-    Date.now(),
-    `--(RENDER)- App isAuth ->`,
-    Platform.OS,
-    'isInitialised->',
-    isInitialised,
-    'isAuth->',
-    isAuth,
-  );
 
   return (
     <SafeAreaProvider>
