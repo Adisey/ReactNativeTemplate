@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
 import { Section } from '../Components';
 
-export const InfoPage: React.FC = () => {
+export const QRScanScreen: React.FC = () => {
   const Styles = useColorThemeStyles();
   const navigation = useNavigation<any>();
   const { isAuth } = useAuthStore();

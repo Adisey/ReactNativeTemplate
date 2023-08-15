@@ -1,4 +1,4 @@
-export * from './InfoPage';
+export * from './QRScanScreen';
 export * from './LogIn';
 export * from './MainScreen';
 export * from './ReactionPage';

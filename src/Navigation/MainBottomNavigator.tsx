@@ -1,14 +1,15 @@
 import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { useColorThemeStyles } from '../hooks';
 import { useNavigatorTheme } from '../hooks/useNavigatorTheme';
-import { InfoPage, ReactionPage, SettingScreen } from '../Screens';
+import { QRScanScreen, ReactionPage, SettingScreen } from '../Screens';
 
 export type BottomTabsStackParamList = {
   Setting: undefined;
-  InfoPage: undefined;
+  QRScanScreen: undefined;
   ReactionPage: undefined;
 };
 
@@ -39,12 +40,16 @@ export function MainBottomNavigator() {
           }}
         />
         <MainBottomNavigatorStack.Screen
-          name="InfoPage"
-          component={InfoPage}
+          name="QRScanScreen"
+          component={QRScanScreen}
           options={{
-            tabBarLabel: 'Info',
+            tabBarLabel: 'QR-Scan',
             tabBarIcon: ({ color, size }) => (
-              <AntDesignIcons name="infocirlceo" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="qrcode-scan"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
