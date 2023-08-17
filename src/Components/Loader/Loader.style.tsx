@@ -4,10 +4,10 @@ export const LoaderStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
   },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
+  text: {
+    fontSize: 20,
   },
 });
