@@ -19,7 +19,7 @@ export const QRScanScreen: React.FC = () => {
     <SafeAreaView style={Styles}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={Styles}>
         <View style={Styles}>
-          <Section title="InfoPage">{`isAuth: ${isAuth}`}</Section>
+          <Section title="QRScanScreen">{`isAuth: ${isAuth}`}</Section>
         </View>
         <Button title={'goBack'} onPress={goBack} />
       </ScrollView>
