@@ -3,6 +3,7 @@ import { Platform, Text, View } from 'react-native';
 import RNPermissions, {
   PERMISSIONS,
   Permission,
+  RESULTS,
 } from 'react-native-permissions';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from '@rneui/themed';
@@ -18,8 +19,30 @@ type IPermission = {
   isLoading?: boolean;
 };
 const appNeedPermission = [
-  { name: 'CAMERA', icon: 'camera-enhance' },
-  { name: 'MICROPHONE', icon: 'microphone' },
+  { name: 'CAMERA', title: 'Camera', icon: 'camera-enhance' },
+  { name: 'MICROPHONE', title: 'Microphone', icon: 'microphone' },
+  { name: 'RECORD_AUDIO', title: 'Microphone', icon: 'microphone' },
+  {
+    name: 'ACCESS_BACKGROUND_LOCATION',
+    title: 'Background Location',
+    icon: 'map-marker',
+  },
+  {
+    name: 'ACCESS_COARSE_LOCATION',
+    title: 'Coarse location',
+    icon: 'map-marker-outline',
+  },
+  {
+    name: 'ACCESS_FINE_LOCATION',
+    title: 'Fine location',
+    icon: 'map-marker-outline',
+  },
+  { name: 'LOCATION_ALWAYS', title: 'Location Always', icon: 'map-marker' },
+  {
+    name: 'LOCATION_WHEN_IN_USE',
+    title: 'Location in use',
+    icon: 'map-marker-outline',
+  },
 ];
 const { SIRI, ...PERMISSIONS_IOS } = PERMISSIONS.IOS; // remove siri (certificate required)
 const PLATFORM_PERMISSIONS = Platform.select<
@@ -46,18 +69,17 @@ const devicePermissions: IPermission[] = Object.values(PLATFORM_PERMISSIONS)
   .map(item => {
     const parts = item.split('.');
     const permissionName = parts[parts.length - 1];
-    const { icon, name } = appNeedPermission.find(
+    const { icon, title } = appNeedPermission.find(
       i => i.name === permissionName,
     ) || {
-      name: '',
       icon: '',
+      title: '',
     };
-    console.log(Date.now(), `--()-  ->`, name, permissionName);
     return {
       permission: item as Permission,
       icon,
-      status: 'xxx',
-      title: permissionName,
+      status: '',
+      title,
     };
   });
 
@@ -68,18 +90,20 @@ export const Permissions: React.FC = () => {
     useState<IPermission[]>(devicePermissions);
 
   const setPermissionLoading = (permission: Permission, isLoading: boolean) => {
-    const newP = permissions.map((i: IPermission): IPermission => {
-      return i.permission === permission ? { ...i, isLoading } : { ...i };
-    });
-    setPermissions(newP);
+    setPermissions(prev =>
+      prev.map((i: IPermission): IPermission => {
+        return i.permission === permission ? { ...i, isLoading } : { ...i };
+      }),
+    );
   };
   const setPermissionStatus = (permission: Permission, status: string) => {
-    const newP = permissions.map((i: IPermission): IPermission => {
-      return i.permission === permission
-        ? { ...i, status, isLoading: false }
-        : { ...i };
-    });
-    setPermissions(newP);
+    setPermissions(prev =>
+      prev.map((i: IPermission): IPermission => {
+        return i.permission === permission
+          ? { ...i, status, isLoading: false }
+          : { ...i };
+      }),
+    );
   };
 
   const checkStatus = (permission: Permission) => {
@@ -87,9 +111,22 @@ export const Permissions: React.FC = () => {
     RNPermissions.check(permission)
       .then(status => {
         setPermissionStatus(permission, status);
+        console.log(
+          new Date().toISOString(),
+          Platform.OS,
+          `--(checkStatus)-  ->`,
+          permission,
+          status,
+        );
       })
       .catch(error => {
-        console.error(Date.now(), `--(checkStatus)-  ->`, permission, error);
+        console.error(
+          new Date().toISOString(),
+          Platform.OS,
+          `--(checkStatus)-  ->`,
+          permission,
+          error,
+        );
         setPermissionLoading(permission, false);
       });
   };
@@ -99,9 +136,22 @@ export const Permissions: React.FC = () => {
     RNPermissions.request(permission)
       .then(status => {
         setPermissionStatus(permission, status);
+        console.log(
+          new Date().toISOString(),
+          Platform.OS,
+          `--(getPermission)-  ->`,
+          permission,
+          status,
+        );
       })
       .catch(error => {
-        console.error(Date.now(), `--(getPermission)-  ->`, permission, error);
+        console.error(
+          new Date().toISOString(),
+          Platform.OS,
+          `--(getPermission)-  ->`,
+          permission,
+          error,
+        );
         setPermissionLoading(permission, false);
       });
   };
@@ -110,13 +160,14 @@ export const Permissions: React.FC = () => {
     permissions.forEach(i => checkStatus(i.permission));
   }, []);
 
-  console.log(
-    Platform.OS,
-    '-(RENDER)->',
-    new Date().toISOString(),
-    `-permissions->`,
-    permissions,
-  );
+  // console.log(
+  //   Platform.OS,
+  //   '-(RENDER)->',
+  //   new Date().toISOString(),
+  //   `-permissions->`,
+  //   permissions.length,
+  //   '*'.repeat(50),
+  // );
 
   return (
     <View style={Styles}>
@@ -124,12 +175,9 @@ export const Permissions: React.FC = () => {
         title="Permissions"
         materialCommunityIconsName={'cellphone-lock'}>
         {permissions.map((item: IPermission, index: number) => {
-          console.log(Date.now(), `->`, index, item);
-
           const onPress = () => {
             getPermission(item.permission);
           };
-
           return (
             <View key={index} style={PermissionsStyles.permissionsItemWrap}>
               <View style={PermissionsStyles.permissionsItem}>
@@ -138,11 +186,11 @@ export const Permissions: React.FC = () => {
                     style={[
                       Styles,
                       PermissionsStyles.permissionsIcon,
-                      item.status === 'granted'
+                      item.status === RESULTS.GRANTED
                         ? PermissionsStyles.permissionsIconStatusOk
                         : PermissionsStyles.permissionsIconStatusNot,
                     ]}
-                    name={item.status === 'granted' ? 'check' : 'close'}
+                    name={item.status === RESULTS.GRANTED ? 'check' : 'close'}
                   />
                 </View>
                 <View style={PermissionsStyles.permissionsIconWrap}>
@@ -154,18 +202,17 @@ export const Permissions: React.FC = () => {
                   ) : null}
                 </View>
                 <Text style={[Styles, PermissionsStyles.permissionsTitle]}>
-                  {item.title}
+                  {item.title}:
                 </Text>
                 <Text style={[Styles, PermissionsStyles.permissionsStatus]}>
                   {item.status}
                 </Text>
               </View>
               <Button
-                style={[PermissionsStyles.permissionsButton]}
-                type={'outline'}
+                type={'clear'}
                 title={'Get'}
                 loading={item.isLoading}
-                disabled={item.isLoading || item.status === 'granted'}
+                disabled={item.isLoading || item.status === RESULTS.GRANTED}
                 onPress={onPress}
               />
             </View>

@@ -24,5 +24,4 @@ export const PermissionsStyles = StyleSheet.create({
   permissionsIconStatusNot: { color: 'red' },
   permissionsTitle: { fontSize: 12, margin: 0, marginRight: 10 },
   permissionsStatus: { fontSize: 12, margin: 0, marginRight: 10 },
-  permissionsButton: { height: 26, width: 160 },
 });
