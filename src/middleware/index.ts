@@ -1,4 +1,4 @@
 export * from './app';
-export * from './checkPermission';
+export * from './permission';
 export * from './setAuthStore';
 export * from './setUiStore';

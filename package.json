@@ -7,7 +7,9 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "podInstall": "cd ios && pod-install",
+    "postinstall": "react-native setup-ios-permissions && pod-install"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",

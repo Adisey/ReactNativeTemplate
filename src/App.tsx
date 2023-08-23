@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAuthStore } from './stores';
-import { initApp } from './middleware/app';
+import { initApp } from './middleware';
 import { MainBottomNavigator } from './Navigation';
 import { LogIn } from './Screens';
 import { CustomStatusBar, Loader } from './Components';
