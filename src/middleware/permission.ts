@@ -1,15 +1,20 @@
 import { Platform } from 'react-native';
-import RNPermissions, {
+import {
   PERMISSIONS,
   Permission,
+  check,
+  request,
 } from 'react-native-permissions';
+import { PermissionStatus } from 'react-native-permissions/src/types';
+import { IColorTheme } from '../interfaces/colorTheme';
 
 export type IPermission = {
   icon: string;
+  isLoading?: boolean;
+  name: string;
   permission: Permission;
   status: string;
   title: string;
-  isLoading?: boolean;
 };
 const appNeedPermission = [
   { name: 'CAMERA', title: 'Camera', icon: 'camera-enhance' },
@@ -65,67 +70,39 @@ export const devicePermissions: IPermission[] = Object.values(
   .map(item => {
     const parts = item.split('.');
     const permissionName = parts[parts.length - 1];
-    const { icon, title } = appNeedPermission.find(
+    const { icon, title, name } = appNeedPermission.find(
       i => i.name === permissionName,
     ) || {
       icon: '',
+      name: '',
       title: '',
     };
     return {
-      permission: item as Permission,
       icon,
+      name,
+      permission: item as Permission,
       status: '',
       title,
     };
   });
 
-export const checkPermissionStatus = (
+export enum CheckPermissionStatus {
+  CHECK = 'check',
+  REQUEST = 'request',
+}
+export const checkPermissionStatus = async (
   permission: Permission,
-  setPermissionStatus: (permission: Permission, status: string) => void,
-  setPermissionLoading: (permission: Permission, isLoading: boolean) => void,
-) => {
-  setPermissionLoading(permission, true);
-  RNPermissions.check(permission)
-    .then(status => {
-      setPermissionStatus(permission, status);
-    })
-    .catch(error => {
-      console.error(
-        new Date().toISOString(),
-        Platform.OS,
-        `--(checkPermissionStatus)-  ->`,
-        permission,
-        error,
-      );
-      setPermissionLoading(permission, false);
-    });
+  type = CheckPermissionStatus.CHECK,
+  setPermissionStatus?: (permission: Permission, status: string) => void,
+  setPermissionLoading?: (permission: Permission, isLoading: boolean) => void,
+): Promise<PermissionStatus> => {
+  setPermissionLoading && setPermissionLoading(permission, true);
+  const status =
+    type === CheckPermissionStatus.REQUEST
+      ? await request(permission)
+      : await check(permission);
+  setPermissionStatus && setPermissionStatus(permission, status);
+  setPermissionLoading && setPermissionLoading(permission, false);
+  return status;
 };
 
-export const getPermissionStatus = (
-  permission: Permission,
-  setPermissionStatus: (permission: Permission, status: string) => void,
-  setPermissionLoading: (permission: Permission, isLoading: boolean) => void,
-) => {
-  setPermissionLoading(permission, true);
-  RNPermissions.request(permission)
-    .then(status => {
-      setPermissionStatus(permission, status);
-      console.log(
-        new Date().toISOString(),
-        Platform.OS,
-        `--(getPermission)-  ->`,
-        permission,
-        status,
-      );
-    })
-    .catch(error => {
-      console.error(
-        new Date().toISOString(),
-        Platform.OS,
-        `--(getPermission)-  ->`,
-        permission,
-        error,
-      );
-      setPermissionLoading(permission, false);
-    });
-};

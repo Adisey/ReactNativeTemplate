@@ -6,10 +6,10 @@ import { useRoute } from '@react-navigation/native';
 import { Button } from '@rneui/themed';
 import { useColorThemeStyles, useIsActiveScreen } from '../../hooks';
 import {
+  CheckPermissionStatus,
   IPermission,
   checkPermissionStatus,
   devicePermissions,
-  getPermissionStatus,
 } from '../../middleware';
 import { Section } from '../index';
 import { PermissionsStyles } from './Permissions.styles';
@@ -20,8 +20,8 @@ export const Permissions: React.FC = () => {
   const [permissions, setPermissions] =
     useState<IPermission[]>(devicePermissions);
 
-  const route = useRoute();
-  const isActiveScreen = useIsActiveScreen(route.name);
+  const { name } = useRoute();
+  const isActiveScreen = useIsActiveScreen(name);
 
   const setPermissionLoading = (permission: Permission, isLoading: boolean) => {
     setPermissions(prev =>
@@ -45,6 +45,7 @@ export const Permissions: React.FC = () => {
       permissions.forEach(i =>
         checkPermissionStatus(
           i.permission,
+          CheckPermissionStatus.CHECK,
           setPermissionStatus,
           setPermissionLoading,
         ),
@@ -69,8 +70,9 @@ export const Permissions: React.FC = () => {
         materialCommunityIconsName={'cellphone-lock'}>
         {permissions.map((item: IPermission, index: number) => {
           const onPress = () => {
-            getPermissionStatus(
+            checkPermissionStatus(
               item.permission,
+              CheckPermissionStatus.REQUEST,
               setPermissionStatus,
               setPermissionLoading,
             );
