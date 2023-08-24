@@ -6,7 +6,6 @@ import {
   request,
 } from 'react-native-permissions';
 import { PermissionStatus } from 'react-native-permissions/src/types';
-import { IColorTheme } from '../interfaces/colorTheme';
 
 export type IPermission = {
   icon: string;
@@ -105,4 +104,3 @@ export const checkPermissionStatus = async (
   setPermissionLoading && setPermissionLoading(permission, false);
   return status;
 };
-

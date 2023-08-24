@@ -18,6 +18,7 @@ type IUseGetPermission = {
 
 export const useScreenPermission = (
   screenPermissions: IPermission[],
+  isGetPermissionsOnStart = false,
 ): IUseGetPermission => {
   const [permissions, setPermissions] =
     useState<IPermission[]>(screenPermissions);
@@ -42,25 +43,42 @@ export const useScreenPermission = (
     );
   };
 
+  const getPermissionsOnStart = async () => {
+    if (isGetPermissionsOnStart) {
+      for (const i of permissions) {
+        await checkPermissionStatus(
+          i.permission,
+          CheckPermissionStatus.REQUEST,
+        );
+      }
+    }
+  };
+
+  const checkAllPermissions = async () => {
+    permissions.forEach(i =>
+      checkPermissionStatus(
+        i.permission,
+        CheckPermissionStatus.CHECK,
+        setPermissionStatus,
+        setPermissionLoading,
+      ),
+    );
+  };
+
+  const initHook = async () => {
+    await getPermissionsOnStart();
+    await checkAllPermissions();
+  };
+
   useEffect(() => {
     if (isActiveScreen) {
-      permissions.forEach(i =>
-        checkPermissionStatus(
-          i.permission,
-          CheckPermissionStatus.CHECK,
-          setPermissionStatus,
-          setPermissionLoading,
-        ),
-      );
+      initHook();
     }
   }, [isActiveScreen]);
 
   const isRight = permissions
     .map(i => i.status === 'granted')
-    .reduce((res: boolean, item: boolean) => {
-      console.log(Date.now(), `--()- res ->`, res, 'item->', item);
-      return res && item;
-    });
+    .reduce((res: boolean, item: boolean) => res && item);
 
   const isLoading = permissions
     .map(i => !!i.isLoading)

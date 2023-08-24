@@ -15,7 +15,7 @@ import {
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useAuthStore } from '../stores';
 import { useColorThemeStyles } from '../hooks';
-import { MainStackParamList } from '../Navigation';
+import { MainStackParamList } from '../Navigation/MainNavigator';
 import { Logo, Section } from '../Components';
 
 type MainNavigationProp = CompositeNavigationProp<

@@ -27,12 +27,12 @@ import React from 'react';
 // import { CustomStatusBar, Section } from '../Components';
 // import { MainBottomNavigator } from './MainBottomNavigator';
 //
-// export type MainStackParamList = {
-//   MainScreen: undefined;
-//   Page1: undefined;
-//   Page2: { from: string } | undefined;
-//   Settings: undefined;
-// };
+export type MainStackParamList = {
+  MainScreen: undefined;
+  Page1: undefined;
+  Page2: { from: string } | undefined;
+  Settings: undefined;
+};
 //
 // const MainStack = createNativeStackNavigator<MainStackParamList>();
 //

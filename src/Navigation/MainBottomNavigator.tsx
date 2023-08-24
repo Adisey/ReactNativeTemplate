@@ -2,10 +2,16 @@ import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { useColorThemeStyles } from '../hooks';
-import { useNavigatorTheme } from '../hooks/useNavigatorTheme';
+import {
+  BottomTabNavigationProp,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+import {
+  CompositeNavigationProp,
+  NavigationContainer,
+} from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useColorThemeStyles, useNavigatorTheme } from '../hooks';
 import {
   CameraScreen,
   QRScanScreen,
@@ -22,6 +28,11 @@ export type BottomTabsStackParamList = {
 
 const MainBottomNavigatorStack =
   createBottomTabNavigator<BottomTabsStackParamList>();
+
+export type MainBottomNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<BottomTabsStackParamList, 'ReactionPage'>,
+  StackNavigationProp<BottomTabsStackParamList>
+>;
 
 export function MainBottomNavigator() {
   const { backgroundColor, color } = useColorThemeStyles();
