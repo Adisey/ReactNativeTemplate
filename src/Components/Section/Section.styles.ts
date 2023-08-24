@@ -34,4 +34,7 @@ export const SectionStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
   },
+  marginBottom: {
+    marginBottom: 20,
+  },
 });

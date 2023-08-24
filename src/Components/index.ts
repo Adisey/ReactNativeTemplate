@@ -1,3 +1,4 @@
+export * from './AppCamera/AppCamera';
 export * from './CheckAppPermissions/CheckAppPermissions';
 export * from './CustomStatusBar/CustomStatusBar';
 export * from './Loader/Loader';

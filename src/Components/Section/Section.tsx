@@ -6,7 +6,7 @@ import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import { useColorThemeStyles } from '../../hooks';
 import { SectionStyles } from '../../Styles';
 
-type SectionProps = PropsWithChildren<{
+export type ISectionProps = PropsWithChildren<{
   children?: string | number | ReactNode;
   materialCommunityIconsName?: string;
   style?: StyleProp<ViewStyle>;
@@ -17,7 +17,7 @@ export function Section({
   materialCommunityIconsName,
   style,
   title,
-}: SectionProps): JSX.Element {
+}: ISectionProps): JSX.Element {
   const Styles = useColorThemeStyles();
 
   return (
