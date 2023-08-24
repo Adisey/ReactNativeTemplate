@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Permission } from 'react-native-permissions';
-import { useRoute } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import {
   CheckPermissionStatus,
   IPermission,
   checkPermissionStatus,
 } from '../middleware';
-import { useIsActiveScreen } from './useIsActiveScreen';
 
 type IUseGetPermission = {
   isLoading: boolean;
@@ -23,8 +22,7 @@ export const useScreenPermission = (
   const [permissions, setPermissions] =
     useState<IPermission[]>(screenPermissions);
 
-  const { name } = useRoute();
-  const isActiveScreen = useIsActiveScreen(name);
+  const isActiveScreen = useIsFocused();
 
   const setPermissionLoading = (permission: Permission, isLoading: boolean) => {
     setPermissions(prev =>
