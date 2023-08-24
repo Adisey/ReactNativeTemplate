@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
-import { Permission, RESULTS } from 'react-native-permissions';
+import { RESULTS } from 'react-native-permissions';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRoute } from '@react-navigation/native';
 import { Button } from '@rneui/themed';
-import { useColorThemeStyles, useIsActiveScreen } from '../../hooks';
+import { useColorThemeStyles } from '../../hooks';
+import { useScreenPermission } from '../../hooks/useScreenPermission';
 import {
   CheckPermissionStatus,
   IPermission,
@@ -16,52 +16,8 @@ import { PermissionsStyles } from './Permissions.styles';
 
 export const Permissions: React.FC = () => {
   const Styles = useColorThemeStyles();
-
-  const [permissions, setPermissions] =
-    useState<IPermission[]>(devicePermissions);
-
-  const { name } = useRoute();
-  const isActiveScreen = useIsActiveScreen(name);
-
-  const setPermissionLoading = (permission: Permission, isLoading: boolean) => {
-    setPermissions(prev =>
-      prev.map((i: IPermission): IPermission => {
-        return i.permission === permission ? { ...i, isLoading } : { ...i };
-      }),
-    );
-  };
-  const setPermissionStatus = (permission: Permission, status: string) => {
-    setPermissions(prev =>
-      prev.map((i: IPermission): IPermission => {
-        return i.permission === permission
-          ? { ...i, status, isLoading: false }
-          : { ...i };
-      }),
-    );
-  };
-
-  useEffect(() => {
-    if (isActiveScreen) {
-      permissions.forEach(i =>
-        checkPermissionStatus(
-          i.permission,
-          CheckPermissionStatus.CHECK,
-          setPermissionStatus,
-          setPermissionLoading,
-        ),
-      );
-    }
-  }, [isActiveScreen]);
-
-  // console.log(
-  //   Platform.OS,
-  //   '-(RENDER)->',
-  //   new Date().toISOString(),
-  //   `-permissions->`,
-  //   permissions.length,
-  //   // permissions,
-  //   '*'.repeat(50),
-  // );
+  const { permissions, setPermissionLoading, setPermissionStatus } =
+    useScreenPermission(devicePermissions);
 
   return (
     <View style={Styles}>
